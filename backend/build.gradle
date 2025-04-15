@@ -32,6 +32,20 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.security:spring-security-core'
+    implementation 'org.springframework.security:spring-security-config'
+    implementation 'org.springframework.security:spring-security-web'
+    implementation 'org.springframework.security:spring-security-crypto' // 비밀번호 암호화
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
 }
 
 tasks.named('test') {

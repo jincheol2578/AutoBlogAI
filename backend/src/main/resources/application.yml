@@ -16,3 +16,12 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MariaDBDialect
+
+jwt:
+  secret: your-jwt-secret-key
+  expiration: 86400000  # 1일 = 1000 * 60 * 60 * 24 (ms 단위)
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
