@@ -53,6 +53,15 @@ public class User implements UserDetails {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Column(name = "coupang_sld", nullable = false, length = 100)
+    private String coupangSld;
+
+    @Column(name = "coupang_api_key", nullable = false, length = 255)
+    private String coupangApiKey;
+
+    @Column(name = "coupang_secret_key", nullable = false, length = 255)
+    private String coupangSecretKey;
+
     // UserDetails override
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

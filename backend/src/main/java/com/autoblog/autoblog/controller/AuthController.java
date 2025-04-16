@@ -41,4 +41,14 @@ public class AuthController {
             return ResponseEntity.status(401).body("Invalid credentials.");
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout() {
+        try {
+            authService.logout();
+            return ResponseEntity.ok("User logged out successfully.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

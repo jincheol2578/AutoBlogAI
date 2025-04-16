@@ -7,3 +7,5 @@
 *.jar
 *.war
 *.iml
+backend/src/main/resources/application.yml
+sql/ddl.sql

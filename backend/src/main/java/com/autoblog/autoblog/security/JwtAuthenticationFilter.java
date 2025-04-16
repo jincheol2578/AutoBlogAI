@@ -49,11 +49,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                } else {
+                    // 토큰이 유효하지 않은 경우 401 반환
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token");
+                    return;
                 }
             }
         } catch (Exception e) {
-            // 필요시 로그 출력 또는 response에 401, 403 등 설정
+            // 인증 실패 시 401 반환
             logger.error("JWT 인증 실패: ", e);
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+            return;
         }
 
         filterChain.doFilter(request, response);

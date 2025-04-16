@@ -2,6 +2,7 @@ package com.autoblog.autoblog.service;
 
 import com.autoblog.autoblog.domain.Role;
 import com.autoblog.autoblog.domain.User;
+import com.autoblog.autoblog.dto.CoupangDto;
 import com.autoblog.autoblog.dto.RegisterDto;
 import com.autoblog.autoblog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,21 @@ public class UserService {
                 .password(passwordEncoder.encode(registerDto.getPassword()))
                 .role(Role.USER) // 기본 권한 부여
                 .build();
+
+        userRepository.save(user);
+    }
+
+    public void updateCoupangInfo(String username, CoupangDto dto) {
+        if (dto.getSubld() == null || dto.getSubld().isEmpty()) {
+            throw new IllegalArgumentException("Invalid data");
+        }
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + username));
+
+        user.setCoupangSld(dto.getSubld());
+        user.setCoupangApiKey(dto.getApiKey());
+        user.setCoupangSecretKey(dto.getSecretKey());
 
         userRepository.save(user);
     }
