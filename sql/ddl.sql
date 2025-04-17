@@ -15,7 +15,7 @@ CREATE TABLE users (
 CREATE TABLE keywords (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     keyword VARCHAR(255) NOT NULL,
-    score INT,
+    score VARCHAR(255),
     is_valid BOOLEAN DEFAULT FALSE,
     user_id BIGINT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -26,12 +26,15 @@ CREATE TABLE keywords (
 CREATE TABLE products (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     keyword_id BIGINT,
+    user_id BIGINT,
     product_name VARCHAR(255),
     price DECIMAL(10, 2),
     description TEXT,
     product_url TEXT,
+    partner_url TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (keyword_id) REFERENCES keywords(id)
+    FOREIGN KEY (keyword_id) REFERENCES keywords(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- 4. 상품 이미지 테이블

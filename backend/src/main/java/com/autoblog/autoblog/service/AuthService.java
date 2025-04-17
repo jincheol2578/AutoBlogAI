@@ -1,6 +1,6 @@
 package com.autoblog.autoblog.service;
 
-import com.autoblog.autoblog.dto.CoupangDto;
+import com.autoblog.autoblog.dto.CoupangApiDto;
 import com.autoblog.autoblog.dto.LoginDto;
 import com.autoblog.autoblog.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;

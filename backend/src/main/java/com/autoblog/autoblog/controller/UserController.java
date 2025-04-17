@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.autoblog.autoblog.dto.CoupangDto;
+import com.autoblog.autoblog.dto.CoupangApiDto;
 import com.autoblog.autoblog.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 import jakarta.validation.Valid;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
@@ -22,11 +24,16 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("/coupang")
-    public ResponseEntity<String> updateCoupangInfo(
-            @Valid @RequestBody CoupangDto dto,
+    public ResponseEntity<?> updateCoupangInfo(
+            @Valid @RequestBody CoupangApiDto dto,
             @AuthenticationPrincipal UserDetails userDetails) {
 
-        userService.updateCoupangInfo(userDetails.getUsername(), dto);
-        return ResponseEntity.ok("Coupang 정보가 업데이트되었습니다.");
+        try {
+            userService.updateCoupangInfo(userDetails.getUsername(), dto);
+            return ResponseEntity.ok("Coupang 정보가 업데이트되었습니다.");
+        } catch (RuntimeException e) {
+            // JSON 객체로 에러 메시지 반환
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

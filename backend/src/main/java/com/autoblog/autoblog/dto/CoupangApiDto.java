@@ -6,10 +6,10 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
-public class CoupangDto {
+public class CoupangApiDto {
 
     @NotEmpty(message = "Subld는 비어 있을 수 없습니다.")
-    private String subld;
+    private String subId;
 
     @NotEmpty(message = "API Key는 비어 있을 수 없습니다.")
     private String apiKey;
@@ -17,4 +17,5 @@ public class CoupangDto {
     @NotEmpty(message = "Secret Key는 비어 있을 수 없습니다.")
     private String secretKey;
 
+    private String keyword;
 }
