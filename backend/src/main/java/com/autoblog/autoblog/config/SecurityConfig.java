@@ -28,14 +28,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable() // CSRF 비활성화
-            .httpBasic().disable() // 기본 로그인 폼 비활성화
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션 사용 안 함
-            .and()
+            .csrf(csrf -> csrf.disable()) // CSRF 비활성화
+            .httpBasic(httpBasic -> httpBasic.disable()) // 기본 로그인 폼 비활성화
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용 안 함
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll() // 회원가입/로그인 인증 없이 허용
-                .anyRequest().authenticated() // 나머지 경로는 인증 필요
-            )
+            .requestMatchers("/api/auth/**").permitAll() // 로그인 회원가입 접근 허용
+            .requestMatchers("/h2-console/**").permitAll() // H2 콘솔 접근 허용
+            .anyRequest().authenticated() // 나머지 경로는 인증 필요
+        )
+            .headers(headers -> headers.frameOptions().sameOrigin()) // H2 콘솔 사용을 위한 설정 개발 환경에서만 사용
             .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, customUserDetailsService),
                              UsernamePasswordAuthenticationFilter.class); // JWT 필터 등록
 

@@ -1,23 +1,23 @@
 package com.autoblog.autoblog.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.CollectionTable;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,10 +48,26 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role = Role.USER;
+    @Builder.Default
+    private Role role = Role.USER; // 기본값 유지
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now(); // 기본값 유지
+
+    @Column(name = "coupang_sub_id", nullable = false, length = 100)
+    private String coupangSubId;
+
+    @Column(name = "coupang_api_key", nullable = false, length = 255)
+    private String coupangApiKey;
+
+    @Column(name = "coupang_secret_key", nullable = false, length = 255)
+    private String coupangSecretKey;
+
+    // 양방향 관계
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Product> products = new ArrayList<>(); // 기본값 유지
 
     // UserDetails override
     @Override

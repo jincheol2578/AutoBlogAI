@@ -1,5 +1,6 @@
 package com.autoblog.autoblog.service;
 
+import com.autoblog.autoblog.dto.ApiKeyDto;
 import com.autoblog.autoblog.dto.LoginDto;
 import com.autoblog.autoblog.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -25,4 +26,10 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtTokenProvider.generateToken(authentication.getName());
     }
+
+    public void logout() {
+        // Invalidate the JWT token or perform any other logout logic if needed
+        SecurityContextHolder.clearContext();
+    }
+
 }

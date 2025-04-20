@@ -5,8 +5,8 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('ADMIN', 'USER') DEFAULT 'USER',
-    coupang_subld VARCHAR(100),
-    coupang_access_key VARCHAR(255),
+    coupang_sub_id VARCHAR(100),
+    coupang_api_key VARCHAR(255),
     coupang_secret_key VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -26,9 +26,8 @@ CREATE TABLE keywords (
 CREATE TABLE products (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     keyword_id BIGINT,
-    user_id BIGINT,
     product_name VARCHAR(255),
-    price DECIMAL(10, 2),
+    price BIGINT
     description TEXT,
     product_url TEXT,
     partner_url TEXT,
