@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.autoblog.autoblog.dto.CoupangApiDto;
+import com.autoblog.autoblog.dto.ApiKeyDto;
 import com.autoblog.autoblog.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class UserController {
 
     @PutMapping("/coupang")
     public ResponseEntity<?> updateCoupangInfo(
-            @Valid @RequestBody CoupangApiDto dto,
+            @Valid @RequestBody ApiKeyDto dto,
             @AuthenticationPrincipal UserDetails userDetails) {
 
         try {

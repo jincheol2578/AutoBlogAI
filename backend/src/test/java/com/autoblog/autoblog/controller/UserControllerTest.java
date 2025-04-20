@@ -13,7 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.autoblog.autoblog.dto.CoupangApiDto;
+import com.autoblog.autoblog.dto.ApiKeyDto;
 import com.autoblog.autoblog.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,12 +37,12 @@ public class UserControllerTest {
     @WithMockUser(username = "mockuser")
     void testUpdateCoupangInfoSuccess() throws Exception {
         // Mock 데이터 설정
-        CoupangApiDto dto = new CoupangApiDto();
+        ApiKeyDto dto = new ApiKeyDto();
         dto.setSubId("mockSubld");
         dto.setApiKey("mockApiKey");
         dto.setSecretKey("mockSecretKey");
 
-        Mockito.doNothing().when(userService).updateCoupangInfo(Mockito.eq("mockuser"), Mockito.any(CoupangApiDto.class));
+        Mockito.doNothing().when(userService).updateCoupangInfo(Mockito.eq("mockuser"), Mockito.any(ApiKeyDto.class));
 
         // API 호출 및 검증
         mockMvc.perform(put("/api/user/coupang")
@@ -57,7 +57,7 @@ public class UserControllerTest {
     @WithMockUser(username = "mockuser")
     void testUpdateCoupangInfoBadRequest() throws Exception {
         // Mock 데이터 설정 (필수 필드 누락)
-        CoupangApiDto dto = new CoupangApiDto();
+        ApiKeyDto dto = new ApiKeyDto();
         dto.setApiKey("mockApiKey");
         // secretKey 누락
 
@@ -73,13 +73,13 @@ public class UserControllerTest {
     @WithMockUser(username = "mockuser")
     void testUpdateCoupangInfoServiceException() throws Exception {
         // Mock 데이터 설정
-        CoupangApiDto dto = new CoupangApiDto();
+        ApiKeyDto dto = new ApiKeyDto();
         dto.setSubId("mockSubld");
         dto.setApiKey("mockApiKey");
         dto.setSecretKey("mockSecretKey");
 
         Mockito.doThrow(new RuntimeException("Mock 서비스 오류 발생"))
-                .when(userService).updateCoupangInfo(Mockito.eq("mockuser"), Mockito.any(CoupangApiDto.class));
+                .when(userService).updateCoupangInfo(Mockito.eq("mockuser"), Mockito.any(ApiKeyDto.class));
 
         // API 호출 및 검증
         mockMvc.perform(put("/api/user/coupang")

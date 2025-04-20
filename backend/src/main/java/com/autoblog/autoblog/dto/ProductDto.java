@@ -15,7 +15,7 @@ public class ProductDto {
     private Long keywordId;
     private Long userId;
     private String productName;
-    private Double price;
+    private Long price;
     private String description;
     private String productUrl;
     private String partnerUrl;

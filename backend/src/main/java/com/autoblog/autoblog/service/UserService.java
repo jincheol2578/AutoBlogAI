@@ -2,7 +2,7 @@ package com.autoblog.autoblog.service;
 
 import com.autoblog.autoblog.domain.Role;
 import com.autoblog.autoblog.domain.User;
-import com.autoblog.autoblog.dto.CoupangApiDto;
+import com.autoblog.autoblog.dto.ApiKeyDto;
 import com.autoblog.autoblog.dto.RegisterDto;
 import com.autoblog.autoblog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void updateCoupangInfo(String username, CoupangApiDto dto) {
+    public void updateCoupangInfo(String username, ApiKeyDto dto) {
         if (dto.getSubId() == null || dto.getSubId().isEmpty()) {
             throw new IllegalArgumentException("Invalid data");
         }

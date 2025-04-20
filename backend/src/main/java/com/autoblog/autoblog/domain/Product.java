@@ -41,16 +41,11 @@ public class Product {
     @JoinColumn(name = "keyword_id")
     private Keyword keyword;
 
-    // 연관된 사용자
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
-
     @Column(name = "product_name", length = 255)
     private String productName;
 
-    @Column(name = "price", precision = 10, scale = 2)
-    private BigDecimal price;
+    @Column(name = "price")
+    private Long price;
 
     @Column(columnDefinition = "TEXT")
     private String description;

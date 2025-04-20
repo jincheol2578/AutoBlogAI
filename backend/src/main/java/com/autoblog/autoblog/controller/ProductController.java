@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.autoblog.autoblog.service.CoupangApiService;
+import com.autoblog.autoblog.service.ProductService;
 import com.autoblog.autoblog.dto.ProductDto;
 
 import lombok.RequiredArgsConstructor;
@@ -20,9 +20,9 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/cupang")
 @RequiredArgsConstructor
-public class CoupangApiController {
+public class ProductController {
 
-    private final CoupangApiService coupangApiService;
+    private final ProductService coupangApiService;
 
     @PostMapping("/getProduct")
     public ResponseEntity<?> getCupangProduct(@RequestParam String keyword,

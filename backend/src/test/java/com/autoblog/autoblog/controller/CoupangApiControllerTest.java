@@ -17,7 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.autoblog.autoblog.service.CoupangApiService;
+import com.autoblog.autoblog.service.ProductService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,7 +27,7 @@ public class CoupangApiControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private CoupangApiService coupangApiService;
+    private ProductService coupangApiService;
 
     @Test
     @DisplayName("Coupang 상품 검색 성공 테스트")
