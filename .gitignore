@@ -11,3 +11,7 @@ backend/src/main/resources/application.yml
 sql/ddl.sql
 backend/src/main/resources/secret-application.yml
 backend/src/main/java/com/autoblog/autoblog/api/ApiTest.java
+backend/src/main/java/com/autoblog/autoblog/crawler/CralwerTest.java
+crawler/crawler.py
+crawler/test.py
+chatbot/config/settings.json

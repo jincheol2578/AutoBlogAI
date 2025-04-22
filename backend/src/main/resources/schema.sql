@@ -49,14 +49,11 @@ CREATE TABLE product_images (
 -- 5. AI 리뷰 초안 테이블
 CREATE TABLE draft_reviews (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    keyword_id BIGINT,
     product_id BIGINT,
-    user_id BIGINT,
     title VARCHAR(255),
+    content TEXT
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (keyword_id) REFERENCES keywords(id),
     FOREIGN KEY (product_id) REFERENCES products(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- 6. 리뷰 목차(섹션) 테이블

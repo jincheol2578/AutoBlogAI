@@ -1,6 +1,7 @@
 package com.autoblog.autoblog.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.autoblog.autoblog.service.ProductService;
 import com.autoblog.autoblog.dto.ProductDto;
+import com.autoblog.autoblog.service.ProductService;
+import com.autoblog.autoblog.util.ProductParser;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +32,10 @@ public class ProductController {
         try {
             // 서비스 호출
             String response = coupangApiService.getCoupangProducts(keyword, userDetails.getUsername());
-            return ResponseEntity.ok(response);
+            List<ProductDto> productList = ProductParser.parseProducts(response);
+
+            // JSON 객체로 변환하여 반환
+            return ResponseEntity.ok(productList);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("잘못된 요청입니다: " + e.getMessage());
         } catch (IOException e) {

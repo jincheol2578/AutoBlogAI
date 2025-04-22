@@ -22,8 +22,9 @@ public class ProductParser {
             // ProductDto 객체 생성 및 데이터 설정
             ProductDto product = new ProductDto();
             product.setProductName(productJson.getString("productName"));
-            product.setPrice(productJson.getLong("price"));
+            product.setPrice(productJson.getLong("productPrice"));
             product.setProductUrl(productJson.getString("productUrl"));
+            product.setImageUrl(productJson.getString("productImage"));
 
             // 리스트에 추가
             productList.add(product);
