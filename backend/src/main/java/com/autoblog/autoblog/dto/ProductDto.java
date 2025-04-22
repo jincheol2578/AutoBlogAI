@@ -18,5 +18,5 @@ public class ProductDto {
     private Long price;
     private String description;
     private String productUrl;
-    private String partnerUrl;
+    private String imageUrl;
 }

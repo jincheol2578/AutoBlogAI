@@ -54,6 +54,13 @@ dependencies {
 	implementation 'org.json:json:20230227'
 
 	testImplementation 'org.springframework.security:spring-security-test'
+
+	// selenuim 동적 크롤링
+    implementation 'org.seleniumhq.selenium:selenium-java:4.12.1'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.5.3'
+	
+	// playwright 동적 크롤링
+	implementation 'com.microsoft.playwright:playwright:1.44.0'
 }
 
 tasks.named('test') {
