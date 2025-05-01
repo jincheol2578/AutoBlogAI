@@ -8,6 +8,8 @@ CREATE TABLE users (
     coupang_sub_id VARCHAR(100),
     coupang_api_key VARCHAR(255),
     coupang_secret_key VARCHAR(255),
+    vivoldi_id VARCHAR(100),
+    vivoldi_api_key VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -27,13 +29,12 @@ CREATE TABLE products (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     keyword_id BIGINT,
     product_name VARCHAR(255),
-    price BIGINT
+    price BIGINT,
     description TEXT,
     product_url TEXT,
     partner_url TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (keyword_id) REFERENCES keywords(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (keyword_id) REFERENCES keywords(id)
 );
 
 -- 4. 상품 이미지 테이블
@@ -51,9 +52,9 @@ CREATE TABLE draft_reviews (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     product_id BIGINT,
     title VARCHAR(255),
-    content TEXT
+    content TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES products(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 -- 6. 리뷰 목차(섹션) 테이블

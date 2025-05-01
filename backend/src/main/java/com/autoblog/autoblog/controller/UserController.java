@@ -14,7 +14,6 @@ import com.autoblog.autoblog.service.UserService;
 import lombok.RequiredArgsConstructor;
 import jakarta.validation.Valid;
 
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
@@ -23,16 +22,15 @@ public class UserController {
 
     private final UserService userService;
 
-    @PutMapping("/coupang")
+    @PutMapping("/info")
     public ResponseEntity<?> updateCoupangInfo(
             @Valid @RequestBody ApiKeyDto dto,
             @AuthenticationPrincipal UserDetails userDetails) {
 
         try {
-            userService.updateCoupangInfo(userDetails.getUsername(), dto);
+            userService.updateUserInfo(userDetails.getUsername(), dto);
             return ResponseEntity.ok("Coupang 정보가 업데이트되었습니다.");
-        } catch (RuntimeException e) {
-            // JSON 객체로 에러 메시지 반환
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

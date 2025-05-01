@@ -3,7 +3,7 @@ server:
 
 spring:
   config:
-    import: secret:application-secret.yml
+    import: optional:file:application-secret.yml
   datasource:
   #   url: jdbc:mariadb://localhost:3306/autoblogai?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
   #   username: root
@@ -13,7 +13,7 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password: 
-    initialization-mode: always # 데이터 초기화
+    # initialization-mode: never #always
   h2:
     console:
       enabled: true

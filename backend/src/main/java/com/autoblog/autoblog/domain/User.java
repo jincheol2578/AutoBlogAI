@@ -64,10 +64,16 @@ public class User implements UserDetails {
     @Column(name = "coupang_secret_key", nullable = false, length = 255)
     private String coupangSecretKey;
 
+    @Column(name = "vivoldi_id", nullable = false, length = 100)
+    private String vivoldiId;
+
+    @Column(name = "vivoldi_api_key", nullable = false, length = 255)
+    private String vivoldiApiKey;
+
     // 양방향 관계
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<Product> products = new ArrayList<>(); // 기본값 유지
+    private List<Keyword> keywords = new ArrayList<>(); // 기본값 유지
 
     // UserDetails override
     @Override

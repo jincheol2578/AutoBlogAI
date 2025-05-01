@@ -1,37 +1,43 @@
 package com.autoblog.autoblog.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.autoblog.autoblog.api.DeepSeekApiClient;
+import com.autoblog.autoblog.api.OpenRouterApiClient;
 import com.autoblog.autoblog.domain.DraftReview;
 import com.autoblog.autoblog.domain.Product;
+import com.autoblog.autoblog.dto.ProductDto;
 import com.autoblog.autoblog.repository.DraftReviewRepository;
 import com.autoblog.autoblog.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
 public class DraftReviewService {
 
     private final DraftReviewRepository draftReviewRepository;
-    private final DeepSeekApiClient deepSeekApiClient;
+    private final OpenRouterApiClient deepSeekApiClient;
     private final ProductRepository productRepository;
     
     @Transactional
-    public DraftReview createDraftReview(Long productId, String productName, String keyword) {
+    public void createDraftReview(ProductDto productDto) {
+        System.out.println(productDto);
         // DeepSeek API 호출
-        Map<String, Object> apiResponse = deepSeekApiClient.getChatResponse(productName, keyword);
-
+        Mono<Map<String, Object>> apiResponse = deepSeekApiClient.getChatResponse(productDto.getProductName(), productDto.getKeywordName());
+        // 비동기 처리를 기다림
+        Map<String, Object> responseMap = apiResponse.block();
+        
         // 응답 데이터 처리
-        String title = (String) apiResponse.get("title");
-        String content = (String) apiResponse.get("content");
+        String title = (String) responseMap.get("title");
+        String content = (String) responseMap.get("content");
 
         // Product 엔티티 조회
-        Product product = productRepository.findById(productId)
+        Product product = productRepository.findById(productDto.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Product not found"));  
 
 
@@ -40,7 +46,13 @@ public class DraftReviewService {
         draftReview.setProduct(product);
         draftReview.setTitle(title);
         draftReview.setContent(content);
-
-        return draftReviewRepository.save(draftReview);
+        draftReviewRepository.save(draftReview);
     }
+
+    public DraftReview getDraftReview(Long productId) {
+
+        return draftReviewRepository.findByProductId(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Draft review not found for product ID: " + productId));
+    }
+
 }

@@ -22,7 +22,7 @@ public class CoupangApiClient {
         String requestUrl = "/v2/providers/affiliate_open_api/apis/openapi/products/search" + query;
 
         String authorization = HmacGenerator.generate("GET", requestUrl, dto.getSecretKey(), dto.getApiKey());
-
+        System.out.println("상품가져오기 시작");
         // Send request
         StringEntity entity = new StringEntity( requestUrl, "UTF-8");
         entity.setContentEncoding("UTF-8");
@@ -38,6 +38,7 @@ public class CoupangApiClient {
 
         try (InputStream inputStream = httpResponse.getEntity().getContent()) {
             String responseBody = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            System.out.println("Response: " + responseBody);
             return responseBody;
         }
     }

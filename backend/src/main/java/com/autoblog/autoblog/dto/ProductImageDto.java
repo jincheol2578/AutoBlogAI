@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class ProductImageDto {
-    private Long productId;
+    private Long id;
     private String imageUrl;
     private boolean isMain;
 }

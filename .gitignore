@@ -15,3 +15,9 @@ backend/src/main/java/com/autoblog/autoblog/crawler/CralwerTest.java
 crawler/crawler.py
 crawler/test.py
 chatbot/config/settings.json
+client/data/credentials.pkl
+client/data/key.key
+proxy/config/settings.json
+proxy/app/test.py
+__pycache__/
+*.pyc

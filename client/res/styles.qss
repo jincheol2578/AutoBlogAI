@@ -1,0 +1,47 @@
+/* 스타일 전체를 여기서 관리 */
+
+QWidget {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #495057;
+}
+
+QLineEdit {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+QLineEdit:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+QPushButton {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #218838;
+}
+
+QPushButton:pressed {
+    background-color: #1e7e34;
+}
+
+QWidget {
+    padding: 20px;
+}

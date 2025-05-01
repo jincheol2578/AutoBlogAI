@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ProductParser {
 
-    public static List<ProductDto> parseProducts(String jsonResponse) {
+    public static List<ProductDto> parseProducts(Long id, String jsonResponse) {
         List<ProductDto> productList = new ArrayList<>();
 
         // JSON 응답 파싱
@@ -21,6 +21,7 @@ public class ProductParser {
 
             // ProductDto 객체 생성 및 데이터 설정
             ProductDto product = new ProductDto();
+            product.setKeywordId(id);
             product.setProductName(productJson.getString("productName"));
             product.setPrice(productJson.getLong("productPrice"));
             product.setProductUrl(productJson.getString("productUrl"));

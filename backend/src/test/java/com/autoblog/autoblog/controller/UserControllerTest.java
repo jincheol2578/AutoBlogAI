@@ -1,4 +1,5 @@
 package com.autoblog.autoblog.controller;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,8 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.autoblog.autoblog.dto.ApiKeyDto;
 import com.autoblog.autoblog.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -42,7 +41,7 @@ public class UserControllerTest {
         dto.setApiKey("mockApiKey");
         dto.setSecretKey("mockSecretKey");
 
-        Mockito.doNothing().when(userService).updateCoupangInfo(Mockito.eq("mockuser"), Mockito.any(ApiKeyDto.class));
+        Mockito.doNothing().when(userService).updateUserInfo(Mockito.eq("mockuser"), Mockito.any(ApiKeyDto.class));
 
         // API 호출 및 검증
         mockMvc.perform(put("/api/user/coupang")
@@ -79,7 +78,7 @@ public class UserControllerTest {
         dto.setSecretKey("mockSecretKey");
 
         Mockito.doThrow(new RuntimeException("Mock 서비스 오류 발생"))
-                .when(userService).updateCoupangInfo(Mockito.eq("mockuser"), Mockito.any(ApiKeyDto.class));
+                .when(userService).updateUserInfo(Mockito.eq("mockuser"), Mockito.any(ApiKeyDto.class));
 
         // API 호출 및 검증
         mockMvc.perform(put("/api/user/coupang")

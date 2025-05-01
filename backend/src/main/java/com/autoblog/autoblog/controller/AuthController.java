@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.autoblog.autoblog.dto.JwtResponseDto;
 import com.autoblog.autoblog.dto.LoginDto;
 import com.autoblog.autoblog.dto.RegisterDto;
+import com.autoblog.autoblog.security.JwtTokenProvider;
 import com.autoblog.autoblog.service.AuthService;
 import com.autoblog.autoblog.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -21,7 +23,7 @@ public class AuthController {
 
     private final UserService userService;
     private final AuthService authService;
-
+    
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDto dto) {
         try {
@@ -43,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout() {
+    public ResponseEntity<?> logout(HttpServletRequest request) {
         try {
             authService.logout();
             return ResponseEntity.ok("User logged out successfully.");

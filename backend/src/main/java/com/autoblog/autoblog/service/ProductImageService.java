@@ -18,17 +18,4 @@ public class ProductImageService {
     private final ProductRepository productRepository;
     private final ProductImageRepository productImageRepository;
 
-    @Transactional
-    public ProductImage saveImage(ProductImageDto dto) {
-        Product product = productRepository.findById(dto.getProductId())
-                .orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다."));
-
-        ProductImage image = ProductImage.builder()
-                .product(product)
-                .imageUrl(dto.getImageUrl())
-                .isMain(dto.isMain())
-                .build();
-
-        return productImageRepository.save(image);
-    }
 }

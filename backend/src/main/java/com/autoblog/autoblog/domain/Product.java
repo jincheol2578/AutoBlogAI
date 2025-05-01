@@ -1,7 +1,6 @@
 package com.autoblog.autoblog.domain;
 
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -56,8 +55,12 @@ public class Product {
     @Column(name = "partner_url", columnDefinition = "TEXT")
     private String partnerUrl;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductImage> images;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ProductImage> productImages;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DraftReview> draftReviews;
+
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
